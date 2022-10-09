@@ -40,6 +40,9 @@
         <mat-error>{{ getFormControlErrorTest(confirmEmailCtrl) }}</mat-error>
       </mat-form-field>
     </div>
+    <small class="error-text" *ngIf="showEmailError$ | async"
+      >Adresses does not match</small
+    >
   </mat-card>
   <mat-card class="form-card" *ngIf="showPhoneCtrl$ | async">
     <mat-card-subtitle>Phone</mat-card-subtitle>
@@ -66,13 +69,23 @@
         <mat-label>Confirm password</mat-label>
         <input type="password" matInput formControlName="confirmPassword" />
         <mat-error>This field is required</mat-error>
+        <small class="error-text" *ngIf="showPasswordError$ | async">Passwords does not match</small>
       </mat-form-field>
     </div>
   </mat-card>
   <mat-card-actions *ngIf="mainForm.valid">
-    <button mat-flat-button color="primary" (click)="onSubmitForm()" [disabled]="isLoading" >
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="onSubmitForm()"
+      [disabled]="isLoading"
+    >
       SAVE
     </button>
   </mat-card-actions>
-  <mat-spinner *ngIf="isLoading" color="primary" mode="indeterminate"></mat-spinner>
->
+  <mat-spinner
+    *ngIf="isLoading"
+    color="primary"
+    mode="indeterminate"
+  ></mat-spinner>
+</mat-card>

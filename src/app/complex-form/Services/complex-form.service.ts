@@ -6,7 +6,10 @@ import { ComplexFormValue } from "../models/complex-form-value.model";
 
 
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class ComplexFormService {
     
   constructor(private http: HttpClient) {}
