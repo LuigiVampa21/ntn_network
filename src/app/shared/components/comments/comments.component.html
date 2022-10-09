@@ -1,16 +1,21 @@
 <div class="comments-row">
-    <mat-form-field>
-      <input type="text" matInput placeholder="Drop your comment" [formControl]="commentCtrl">
-    </mat-form-field>
-    <button mat-icon-button color="primary" (click)="onLeaveComment()">
-      <mat-icon>send</mat-icon>
-    </button>
-  </div>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Drop your comment"
+      [formControl]="commentCtrl"
+    />
+  </mat-form-field>
+  <button mat-icon-button color="primary" (click)="onLeaveComment()">
+    <mat-icon>send</mat-icon>
+  </button>
+</div>
 
 <mat-list *ngIf="comments.length">
-    <h2 matSubHeader>Comments</h2>
-    <mat-list-item *ngFor="let comment of comments">
-        <span mat-line>{{ comment.comment}}</span>
-        <span mat-line>{{ comment.createdDate}}</span>
-    </mat-list-item>
+  <h2 matSubHeader>Comments</h2>
+  <mat-list-item *ngFor="let comment of comments">
+    <span mat-line>{{ comment.comment }}</span>
+    <span mat-line>{{ comment.createdDate | timeAgo }}</span>
+  </mat-list-item>
 </mat-list>

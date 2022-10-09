@@ -4,7 +4,9 @@
       <span>{{ post.title | titlecase }}</span>
     </mat-card-title>
     <mat-card-subtitle>
-      <span>{{ post.createdDate | date }}</span>
+      <span>{{ userName | username }}</span>
+      <span> {{ space }} </span>
+      <span>{{ post.createdDate | timeAgo }}</span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
@@ -14,9 +16,12 @@
       [src]="post.imageUrl"
       [alt]="post.title"
     />
-    <span class="post-content">{{ post.content }}</span>
+    <span class="post-content">{{ post.content | shorten }}</span>
   </mat-card-content>
   <mat-card-actions>
-    <app-comments [comments]="post.comments" (newComment)="onNewComment($event)"></app-comments>
+    <app-comments
+      [comments]="post.comments"
+      (newComment)="onNewComment($event)"
+    ></app-comments>
   </mat-card-actions>
 </mat-card>

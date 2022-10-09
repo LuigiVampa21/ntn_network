@@ -10,7 +10,8 @@ export class PostListItemComponent implements OnInit {
 
   @Input() post!: Post;
   @Output() onPostComment = new EventEmitter<{comment:string, postId: number}>()
-  
+  userName = { firstName: 'lUiGi', lastName: 'vAmPa' }
+  space =  ' - '
   constructor() { }
 
   ngOnInit(): void {
