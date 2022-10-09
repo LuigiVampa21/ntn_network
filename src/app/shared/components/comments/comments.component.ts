@@ -1,13 +1,25 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { trigger, state, style, transition, animate, query, group, animateChild, stagger, useAnimation } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Comment } from 'src/app/core/models/comment.model';
+import { flashAnimation } from '../../animations/flash.animation';
+import { slideAndFadeAnimation } from '../../animations/slide-and-fade.animation';
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss'],
   animations: [
+
+    trigger('list', [
+      transition(':enter', [
+        query('@listItem', [
+          stagger(50, [
+            animateChild()
+          ])
+        ])
+      ])
+    ]),
     trigger('listItem', [
       state('default', style({
         transform: 'scale(1)',
@@ -25,19 +37,39 @@ import { Comment } from 'src/app/core/models/comment.model';
       transition('active => default', [
         animate('500ms ease-in-out'),
       ]),
-      transition('void => *', [
-        style({
-          transform: 'translateX(-100%)',
-          opacity: 0,
-          backgroundColor: 'rgb(201, 157, 242)',
-        }),
-        animate('250ms ease-out', style({
-          transform:'translateX(0)',
-          opacity: 1,
-          backgroundColor:'white'
-        }))
+      transition(':enter', [
+        query('.comment-text, .comment-date', [
+          animate('500ms', style({
+            opacity: 0
+          }))
+        ]),
+        useAnimation(slideAndFadeAnimation, {
+          params: {
+              time: '5004ms',
+              startColor: 'rgb(201, 157, 242)'
+          }
+      }),
+        group([
+          useAnimation(flashAnimation, {
+            params: {
+                time: '250ms',
+                flashColor: 'rgb(249,179,111)'
+              }
+            }),
+          query('.comment-text', [
+            animate('250ms', style({
+              opacity: 1
+            }))
+          ]),
+          query('.comment-date', [
+            animate('500ms', style({
+              opacity: 1
+            }))
+          ])
+        ])
       ])
-    ])
+    ]
+    )
   ]
 })
 export class CommentsComponent implements OnInit {
