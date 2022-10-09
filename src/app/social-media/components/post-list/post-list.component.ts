@@ -21,7 +21,7 @@ export class PostListComponent implements OnInit {
     )
   }
   onCatchComment(comment:{comment:string, postId: number}){
-      this.postService.addNewComment(comment);    
+      this.postService.addNewComment(comment);        
   }
 
 }

@@ -19,6 +19,5 @@ export class PostListItemComponent implements OnInit {
 
   onNewComment(comment:string){
     this.onPostComment.emit({comment, postId: this.post.id})
-    
   }
 }
