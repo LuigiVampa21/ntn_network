@@ -16,7 +16,7 @@ import { SocialMediaModule } from './social-media/social-media.module';
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    SocialMediaModule
+    SocialMediaModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
