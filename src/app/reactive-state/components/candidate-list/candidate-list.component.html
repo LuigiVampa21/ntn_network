@@ -1,15 +1,41 @@
 <mat-card>
-    <mat-card-title-group>
-      <mat-card-title>
-        Candidates
-      </mat-card-title>
-    </mat-card-title-group>
-    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-    <mat-nav-list *ngIf="candidates$ | async as candidates">
-      <a *ngFor="let candidate of candidates" mat-list-item [routerLink]="candidate.id.toString()">
-        <img [src]="candidate.imageUrl" [alt]="candidate.lastName" matListAvatar>
-        <h3 matLine>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
-        <p matLine>{{ candidate.job }} at {{ candidate.company }}</p>
-      </a>
-    </mat-nav-list>
-  </mat-card>
+  <mat-card-title-group>
+    <mat-card-title> Candidates </mat-card-title>
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-title> Candidats </mat-card-title>
+        <div class="form">
+          <mat-form-field appearance="fill">
+            <input matInput type="text" [formControl]="searchCtrl" />
+            <mat-icon matSuffix>search</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-select [formControl]="searchTypeCtrl">
+              <mat-option
+                *ngFor="let option of searchTypeOptions"
+                [value]="option.value"
+                >{{ option.label }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card-title-group>
+    </mat-card>
+  </mat-card-title-group>
+  <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+  <mat-nav-list *ngIf="candidates$ | async as candidates">
+    <a
+      *ngFor="let candidate of candidates"
+      mat-list-item
+      [routerLink]="candidate.id.toString()"
+    >
+      <img
+        [src]="candidate.imageUrl"
+        [alt]="candidate.lastName"
+        matListAvatar
+      />
+      <h3 matLine>{{ candidate.firstName }} {{ candidate.lastName }}</h3>
+      <p matLine>{{ candidate.job }} at {{ candidate.company }}</p>
+    </a>
+  </mat-nav-list>
+</mat-card>

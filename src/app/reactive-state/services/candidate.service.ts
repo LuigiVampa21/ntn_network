@@ -50,4 +50,8 @@ export class CandidateService {
     );
   }
 
+  refuseCandidate(id:number):void{
+    
+  }
+
 }
